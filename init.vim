@@ -14,7 +14,10 @@ call plug#begin()
     
     " Homepage
     Plug 'https://github.com/mhinz/vim-startify'
-    
+
+    " Icons
+    Plug 'ryanoasis/vim-devicons'
+
     " Auto Pairs
     Plug 'https://github.com/jiangmiao/auto-pairs'
     
@@ -308,3 +311,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+

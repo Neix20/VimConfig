@@ -32,6 +32,12 @@ call plug#begin()
     " Syntax Highlighting
     Plug 'davidhalter/jedi-vim' " Python Syntax 
     Plug 'jelera/vim-javascript-syntax' " Javascript Syntax
+
+    " Git 
+    Plug 'https://github.com/tpope/vim-fugitive'
+
+    " Note Editor
+    Plug 'vimwiki/vimwiki'
     
     " IntelliSense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}

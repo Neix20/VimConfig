@@ -39,6 +39,24 @@ function MyDiff()
   endif
 endfunction
 
+augroup LightLineColorscheme
+  autocmd!
+  autocmd ColorScheme * call LightlineUpdate()
+augroup END
+
+function! LightlineUpdate()
+    try
+    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
+      let g:lightline.colorscheme = substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '') .
+            \ (g:colors_name ==# 'solarized' ? '_' . &background : '')
+      call lightline#init()
+      call lightline#colorscheme()
+      call lightline#update()
+    endif
+  catch
+  endtry
+    echom g:colors_name
+endfunction
 
 call plug#begin("~/autoload/plug.vim")
 
@@ -63,14 +81,10 @@ call plug#begin("~/autoload/plug.vim")
     " Themes
     Plug 'https://github.com/rakr/vim-one'
     Plug 'NLKNguyen/papercolor-theme'
-    Plug 'https://github.com/lifepillar/vim-solarized8'
 
     Plug 'https://github.com/morhetz/gruvbox'
     Plug 'shinchu/lightline-gruvbox.vim'
 
-    " Icons
-    Plug 'ryanoasis/vim-devicons'
-    
     " Syntax Highlighting
     Plug 'davidhalter/jedi-vim' " Python Syntax 
     Plug 'jelera/vim-javascript-syntax' " Javascript Syntax

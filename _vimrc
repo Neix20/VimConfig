@@ -75,6 +75,9 @@ call plug#begin("~/autoload/plug.vim")
     " Homepage
     Plug 'https://github.com/mhinz/vim-startify'
     
+    " Icons
+    Plug 'ryanoasis/vim-devicons'
+
     " Auto Pairs
     Plug 'https://github.com/jiangmiao/auto-pairs'
     

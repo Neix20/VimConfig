@@ -65,7 +65,6 @@ function! LightlineUpdate()
     endif
   catch
   endtry
-    echom g:colors_name
 endfunction
 
 " Vim jump to the last position when reopening a file

@@ -140,6 +140,9 @@ syntax on                   " syntax highlighting
 
 set laststatus=2
 
+set autoread
+au CursorHold * checktime  
+
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup

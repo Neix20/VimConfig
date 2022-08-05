@@ -49,6 +49,9 @@ call plug#begin()
 
 call plug#end()
 
+au FileType html let b:AutoPairs = AutoPairsDefine({'<\(\w\|-\)\+\.\{-}>':'<\/\(\w\|-\)\+>'})
+au FileType cshtml let b:AutoPairs = AutoPairsDefine({'<\(\w\|-\)\+\.\{-}>':'<\/\(\w\|-\)\+>'})
+
 augroup CrystalLineColorScheme
   autocmd!
   autocmd ColorScheme * call CrystalLineUpdate()
@@ -75,6 +78,7 @@ function! StatusLine(current, width)
   endif
 
   let l:s .= ' %f%h%w%m%r '
+
   if a:current
     let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#Head()} %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
   endif
@@ -101,9 +105,6 @@ let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_theme = 'gruvbox'
 
-set showtabline=2
-set guioptions-=e
-set laststatus=2
 " Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -113,6 +114,7 @@ endif
 set termguicolors
 set encoding=utf-8
 set hidden
+set laststatus=2
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
 
@@ -136,7 +138,8 @@ set cc=80                   " set an 80 column border for good coding style
 filetype plugin indent on   " allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 
-set laststatus=2
+set autoread
+au CursorHold * checktime  
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -156,13 +159,6 @@ set t_Co=256
 
 set background=dark
 colorscheme gruvbox
-
-" For Light Themes, solarized
-" For Dark Themes, one
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ }
 
 " Startify Startup Screen
 let g:startify_custom_header = [

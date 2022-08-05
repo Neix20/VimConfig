@@ -39,32 +39,13 @@ function MyDiff()
   endif
 endfunction
 
-augroup LightLineColorscheme
-  autocmd!
-  autocmd ColorScheme * call LightlineUpdate()
-augroup END
-
-function! LightlineUpdate()
-    try
-    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
-      let g:lightline.colorscheme = substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '') .
-            \ (g:colors_name ==# 'solarized' ? '_' . &background : '')
-      call lightline#init()
-      call lightline#colorscheme()
-      call lightline#update()
-    endif
-  catch
-  endtry
-    echom g:colors_name
-endfunction
-
 call plug#begin("~/autoload/plug.vim")
 
     " File Explorer
     Plug 'https://github.com/scrooloose/nerdtree'
     
     " Vim Info
-    Plug 'https://github.com/itchyny/lightline.vim'
+    Plug 'https://github.com/rbong/vim-crystalline'
     
     " Vim Comments
     Plug 'https://github.com/tpope/vim-commentary'
@@ -108,6 +89,22 @@ call plug#begin("~/autoload/plug.vim")
     Plug 'junegunn/fzf.vim'
 
 call plug#end()
+
+augroup CrystalLineColorScheme
+  autocmd!
+  autocmd ColorScheme * call CrystalLineUpdate()
+augroup END
+
+function! CrystalLineUpdate()
+    try
+    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
+        let l:color = get({'one': 'onedark', 'PaperColor': 'papercolor', 'gruvbox': 'gruvbox'}, g:colors_name, 'gruvbox')
+        let g:crystalline_theme = l:color
+        call crystalline#apply_current_theme()
+    endif
+  catch
+  endtry
+endfunction
 
 " Vim jump to the last position when reopening a file
 if has("autocmd")

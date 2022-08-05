@@ -4,7 +4,7 @@ call plug#begin()
     Plug 'https://github.com/scrooloose/nerdtree'
     
     " Vim Info
-    Plug 'https://github.com/itchyny/lightline.vim'
+    Plug 'https://github.com/rbong/vim-crystalline'
     
     " Vim Comments
     Plug 'https://github.com/tpope/vim-commentary'
@@ -49,24 +49,61 @@ call plug#begin()
 
 call plug#end()
 
-augroup LightLineColorscheme
+augroup CrystalLineColorScheme
   autocmd!
-  autocmd ColorScheme * call LightlineUpdate()
+  autocmd ColorScheme * call CrystalLineUpdate()
 augroup END
 
-function! LightlineUpdate()
+function! CrystalLineUpdate()
     try
     if g:colors_name =~# 'one\|PaperColor\|gruvbox'
-      let g:lightline.colorscheme = substitute(substitute(g:colors_name, '-', '_', 'g'), '256.*', '', '') .
-            \ (g:colors_name ==# 'solarized' ? '_' . &background : '')
-      call lightline#init()
-      call lightline#colorscheme()
-      call lightline#update()
+        let l:color = get({'one': 'onedark', 'PaperColor': 'papercolor', 'gruvbox': 'gruvbox'}, g:colors_name, 'gruvbox')
+        let g:crystalline_theme = l:color
+        call crystalline#apply_current_theme()
     endif
   catch
   endtry
 endfunction
 
+function! StatusLine(current, width)
+  let l:s = ''
+
+  if a:current
+    let l:s .= crystalline#mode() . crystalline#right_mode_sep('')
+  else
+    let l:s .= '%#CrystallineInactive#'
+  endif
+
+  let l:s .= ' %f%h%w%m%r '
+  if a:current
+    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#Head()} %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
+  endif
+
+  if a:width > 40 
+    let l:s .= '%='
+    if a:current
+      let l:s .= crystalline#left_sep('', 'Fill') . ' %{&ff} | %{&fenc!=#""?&fenc:&enc} | %{&ft} '
+    endif
+  else 
+    let l:s .= ' '
+  endif
+
+  if a:width > 80
+    let l:s .= crystalline#left_mode_sep('') . ' %P %l:%c '
+  else
+    let l:s .= ' '
+  endif
+
+  return l:s
+endfunction
+
+let g:crystalline_enable_sep = 1
+let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystalline_theme = 'gruvbox'
+
+set showtabline=2
+set guioptions-=e
+set laststatus=2
 " Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")

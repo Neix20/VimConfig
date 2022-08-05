@@ -6,9 +6,6 @@ call plug#begin()
     " Vim Info
     Plug 'https://github.com/rbong/vim-crystalline'
     
-    " Vim Comments
-    Plug 'https://github.com/tpope/vim-commentary'
-    
     " Vim Surround Statement with Brackets
     Plug 'https://github.com/tpope/vim-surround'
     
@@ -26,7 +23,6 @@ call plug#begin()
     Plug 'NLKNguyen/papercolor-theme'
 
     Plug 'https://github.com/morhetz/gruvbox'
-    Plug 'shinchu/lightline-gruvbox.vim'
 
     " Syntax Highlighting
     Plug 'davidhalter/jedi-vim' " Python Syntax 
@@ -48,9 +44,6 @@ call plug#begin()
     Plug 'junegunn/fzf.vim'
 
 call plug#end()
-
-au FileType html let b:AutoPairs = AutoPairsDefine({'<\(\w\|-\)\+\.\{-}>':'<\/\(\w\|-\)\+>'})
-au FileType cshtml let b:AutoPairs = AutoPairsDefine({'<\(\w\|-\)\+\.\{-}>':'<\/\(\w\|-\)\+>'})
 
 augroup CrystalLineColorScheme
   autocmd!

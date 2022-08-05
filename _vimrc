@@ -47,9 +47,6 @@ call plug#begin("~/autoload/plug.vim")
     " Vim Info
     Plug 'https://github.com/rbong/vim-crystalline'
     
-    " Vim Comments
-    Plug 'https://github.com/tpope/vim-commentary'
-    
     " Vim Surround Statement with Brackets
     Plug 'https://github.com/tpope/vim-surround'
     
@@ -67,7 +64,6 @@ call plug#begin("~/autoload/plug.vim")
     Plug 'NLKNguyen/papercolor-theme'
 
     Plug 'https://github.com/morhetz/gruvbox'
-    Plug 'shinchu/lightline-gruvbox.vim'
 
     " Syntax Highlighting
     Plug 'davidhalter/jedi-vim' " Python Syntax 

@@ -34,9 +34,6 @@ call plug#begin()
     " Note Editor
     Plug 'vimwiki/vimwiki'
 
-    " IntelliSense
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    
     " Auto Format
     Plug 'vim-autoformat/vim-autoformat'
     
@@ -61,42 +58,222 @@ function! CrystalLineUpdate()
   endtry
 endfunction
 
-function! StatusLine(current, width)
-  let l:s = ''
+function! GitBranchName()
+    let l:git_branch = system("git branch")
 
-  if a:current
-    let l:s .= crystalline#mode() . crystalline#right_mode_sep('')
-  else
-    let l:s .= '%#CrystallineInactive#'
-  endif
-
-  let l:s .= ' %f%h%w%m%r '
-
-  if a:current
-    let l:s .= crystalline#right_sep('', 'Fill') . ' %{fugitive#Head()} %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""}'
-  endif
-
-  if a:width > 40 
-    let l:s .= '%='
-    if a:current
-      let l:s .= crystalline#left_sep('', 'Fill') . ' %{&ff} | %{&fenc!=#""?&fenc:&enc} | %{&ft} '
+    " Check if Git Branch Exists
+    if stridx(l:git_branch, "Fatal") >= 0
+        return ''
     endif
-  else 
-    let l:s .= ' '
-  endif
 
-  if a:width > 80
-    let l:s .= crystalline#left_mode_sep('') . ' %P %l:%c '
-  else
-    let l:s .= ' '
-  endif
+    " Remove First 2 Characters
+    let l:git_branch = l:git_branch[2:-2]
 
-  return l:s
+    return l:git_branch
+endfunction
+
+function! StatusLine(current, width)
+    let l:s = ''
+
+    " Body
+    let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+
+    let l:s .= '%='
+    let l:s .= '%#CrystallineNormalMode#'
+    let l:s .= ' %l:%c '
+
+    if a:current
+
+        if a:width > 100
+
+            " Get Dos Icon
+            let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= crystalline#right_mode_sep('') . '  %{fugitive#Head()} ' 
+
+            " Body
+            let l:s .= crystalline#right_sep('', 'Fill')
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+            let l:s .= '%='
+            let l:s .= ' %{&fileencoding?&fileencoding:&encoding} |'
+            let l:s .= ' ' . l:ff_icon . ' |'
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+
+            " Second Tail
+            let l:s .= crystalline#left_sep('', 'Fill') . ' %P ' 
+
+            " Tail
+            let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
+
+        elseif a:width > 60 && a:width <= 100
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= crystalline#right_mode_sep('')
+
+            " Body
+            let l:s .= crystalline#right_sep('', 'Fill')
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+            let l:s .= '%='
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+
+            " Second Tail
+            let l:s .= crystalline#left_sep('', 'Fill') . ' %P ' 
+
+            " Tail
+            let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
+
+        elseif a:width > 40 && a:width <= 60
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= crystalline#right_mode_sep('')
+
+            " Body
+            let l:s .= crystalline#right_sep('', 'Fill')
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":"" } '
+            let l:s .= '%='
+
+            " Second Tail
+            let l:s .= crystalline#left_sep('', 'Fill')
+
+            " Tail
+            let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
+        endif
+
+    else
+
+        if a:width > 100
+
+            " Get Dos Icon
+            let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= '%#CrystallineTab#'
+            let l:s .= '  %{fugitive#Head()} ' 
+
+            " Body
+            let l:s .= '%#CrystallineFill#'
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+            let l:s .= '%='
+            let l:s .= ' %{&fileencoding?&fileencoding:&encoding} |'
+            let l:s .= ' ' . l:ff_icon . ' |'
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+
+            " Second Tail
+            let l:s .= '%#CrystallineTab#' . ' %P ' 
+
+            " Tail
+            let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+
+        elseif a:width > 60 && a:width <= 100
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= '%#CrystallineTab#'
+
+            " Body
+            let l:s .= '%#CrystallineFill#'
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+            let l:s .= '%='
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+
+            " Second Tail
+            let l:s .= '%#CrystallineTab#' . ' %P ' 
+
+            " Tail
+            let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+
+        elseif a:width > 40 && a:width <= 60
+
+            " Head
+            let l:s = crystalline#mode()  
+
+            " Second Head
+            let l:s .= '%#CrystallineTab#'
+
+            " Body
+            let l:s .= '%#CrystallineFill#'
+            let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":"" } '
+            let l:s .= '%='
+
+            " Second Tail
+            let l:s .= '%#CrystallineTab#'
+
+            " Tail
+            let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+
+        endif
+
+    endif
+
+    return l:s
 endfunction
 
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_theme = 'gruvbox'
+
+" Tab Line
+function MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    let fileName = bufname(buflist[winnr - 1])
+
+    " Only Get Tail of Path
+    let fileName = fnamemodify(fileName, ":t")
+
+    " Check if Filename is Empty
+    let fileName = strlen(fileName) > 0 ? fileName : '[No Name]' 
+
+    return fileName  
+endfunction
+
+function MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+          let s .= '%#CrystallineTabSel#'
+        else
+          let s .= '%#CrystallineTab#'
+        endif
+
+        " set the tab page number (for mouse clicks)
+        let s .= ' ' . (i + 1)
+
+        " the label is made by MyTabLabel()
+        let l:tabLabel = MyTabLabel(i + 1)
+        let l:modified = gettabwinvar(i + 1, 1, '&modified')
+        let s .= ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . WebDevIconsGetFileTypeSymbol(l:tabLabel) . ' '
+
+    endfor
+
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#CrystallineTabFill#%T'
+
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+        let s .= '%=%#CrystallineTab#%999XX'
+    endif
+
+    return s
+endfunction
+
+set tabline=%!MyTabLine()
 
 " Vim jump to the last position when reopening a file
 if has("autocmd")
@@ -105,6 +282,9 @@ if has("autocmd")
 endif
 
 set termguicolors
+
+set tags=./tags,tags
+
 set encoding=utf-8
 set hidden
 set laststatus=2
@@ -131,8 +311,8 @@ set cc=80                   " set an 80 column border for good coding style
 filetype plugin indent on   " allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 
-set autoread
-au CursorHold * checktime  
+" set autoread
+" au CursorHold * checktime  
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -190,150 +370,4 @@ vnoremap <C-c> "+y
 nnoremap <C-z> u
 inoremap <C-z> u
 vnoremap <C-z> u
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Run the Code Lens action on the current line.
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 

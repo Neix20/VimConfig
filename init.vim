@@ -28,6 +28,9 @@ call plug#begin()
     Plug 'davidhalter/jedi-vim' " Python Syntax 
     Plug 'jelera/vim-javascript-syntax' " Javascript Syntax
 
+    " Test Startup Time
+    Plug 'https://github.com/dstein64/vim-startuptime'
+
     " Git 
     Plug 'https://github.com/tpope/vim-fugitive'
 
@@ -76,6 +79,7 @@ function! StatusLine(current, width)
     let l:s = ''
 
     " Body
+    let l:s .= '%#CrystallineFill#'
     let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
 
     let l:s .= '%='
@@ -223,10 +227,6 @@ function! StatusLine(current, width)
     return l:s
 endfunction
 
-let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_theme = 'gruvbox'
-
 " Tab Line
 function MyTabLabel(n)
     let buflist = tabpagebuflist(a:n)
@@ -274,6 +274,10 @@ function MyTabLine()
 endfunction
 
 set tabline=%!MyTabLine()
+
+let g:crystalline_enable_sep = 1
+let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystalline_theme = 'gruvbox'
 
 " Vim jump to the last position when reopening a file
 if has("autocmd")

@@ -69,6 +69,9 @@ call plug#begin("~/autoload/plug.vim")
     Plug 'davidhalter/jedi-vim' " Python Syntax 
     Plug 'jelera/vim-javascript-syntax' " Javascript Syntax
 
+    " Test Startup Time
+    Plug 'https://github.com/dstein64/vim-startuptime'
+
     " Git 
     Plug 'https://github.com/tpope/vim-fugitive'
 
@@ -117,6 +120,7 @@ function! StatusLine(current, width)
     let l:s = ''
 
     " Body
+    let l:s .= '%#CrystallineFill#'
     let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
 
     let l:s .= '%='
@@ -372,7 +376,7 @@ set shortmess+=c
 set t_Co=256
 
 set background=dark
-colorscheme gruvbox
+colorscheme one
 
 " Startify Startup Screen
 let g:startify_custom_header = [
@@ -399,6 +403,7 @@ let g:startify_custom_header = [
             \'         \/____/                  \/____/                  \/____/                  \/____/          \/____/ ',
             \'                                                                                                             ',
             \]
+
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 

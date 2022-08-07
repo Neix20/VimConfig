@@ -88,9 +88,6 @@ function! StatusLine(current, width)
 
     if a:current
         if a:width > 100
-            " Get Dos Icon
-            let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
-
             " Head
             let l:s = crystalline#mode()  
 
@@ -102,8 +99,8 @@ function! StatusLine(current, width)
             let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
             let l:s .= '%='
             let l:s .= ' %{&fileencoding?&fileencoding:&encoding} |'
-            let l:s .= ' ' . l:ff_icon . ' |'
-            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+            let l:s .= ' %{WebDevIconsGetFileFormatSymbol()} |'
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
             let l:s .= crystalline#left_sep('', 'Fill') . ' %P ' 
@@ -121,7 +118,7 @@ function! StatusLine(current, width)
             let l:s .= crystalline#right_sep('', 'Fill')
             let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
             let l:s .= '%='
-            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
             let l:s .= crystalline#left_sep('', 'Fill') . ' %P ' 
@@ -148,8 +145,6 @@ function! StatusLine(current, width)
         endif
     else
         if a:width > 100
-            " Get Dos Icon
-            let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
 
             " Head
             let l:s = ''
@@ -163,8 +158,8 @@ function! StatusLine(current, width)
             let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
             let l:s .= '%='
             let l:s .= ' %{&fileencoding?&fileencoding:&encoding} |'
-            let l:s .= ' ' . l:ff_icon . ' |'
-            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+            let l:s .= ' %{WebDevIconsGetFileFormatSymbol()} |'
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
             let l:s .= '%#CrystallineTab#' . ' %P ' 
@@ -182,7 +177,7 @@ function! StatusLine(current, width)
             let l:s .= '%#CrystallineFill#'
             let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
             let l:s .= '%='
-            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol(&ft)} '
+            let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
             let l:s .= '%#CrystallineTab#' . ' %P ' 

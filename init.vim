@@ -87,9 +87,7 @@ function! StatusLine(current, width)
     let l:s .= ' %l:%c '
 
     if a:current
-
         if a:width > 100
-
             " Get Dos Icon
             let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
 
@@ -112,9 +110,7 @@ function! StatusLine(current, width)
 
             " Tail
             let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
-
         elseif a:width > 60 && a:width <= 100
-
             " Head
             let l:s = crystalline#mode()  
 
@@ -132,9 +128,7 @@ function! StatusLine(current, width)
 
             " Tail
             let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
-
         elseif a:width > 40 && a:width <= 60
-
             " Head
             let l:s = crystalline#mode()  
 
@@ -152,16 +146,13 @@ function! StatusLine(current, width)
             " Tail
             let l:s .= crystalline#left_mode_sep('') . ' %l:%c '
         endif
-
     else
-
         if a:width > 100
-
             " Get Dos Icon
             let l:ff_icon = get({ 'dos': '', 'unix': '', 'mac': '' }, &ff, 'dos')
 
             " Head
-            let l:s = crystalline#mode()  
+            let l:s = ''
 
             " Second Head
             let l:s .= '%#CrystallineTab#'
@@ -180,11 +171,9 @@ function! StatusLine(current, width)
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
-
         elseif a:width > 60 && a:width <= 100
-
             " Head
-            let l:s = crystalline#mode()  
+            let l:s = ''
 
             " Second Head
             let l:s .= '%#CrystallineTab#'
@@ -200,11 +189,9 @@ function! StatusLine(current, width)
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
-
         elseif a:width > 40 && a:width <= 60
-
             " Head
-            let l:s = crystalline#mode()  
+            let l:s = ''
 
             " Second Head
             let l:s .= '%#CrystallineTab#'
@@ -219,9 +206,7 @@ function! StatusLine(current, width)
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
-
         endif
-
     endif
 
     return l:s

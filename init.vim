@@ -227,19 +227,18 @@ function MyTabLine()
     for i in range(tabpagenr('$'))
         " select the highlighting
         if i + 1 == tabpagenr()
-          let s .= '%#CrystallineTabSel#'
+            let s .= '%#CrystallineTabSel#'
         else
-          let s .= '%#CrystallineTab#'
+            let s .= '%#CrystallineTab#'
         endif
 
         " set the tab page number (for mouse clicks)
-        let s .= ' ' . (i + 1)
+        " let s .= ' ' . (i + 1)
 
         " the label is made by MyTabLabel()
         let l:tabLabel = MyTabLabel(i + 1)
         let l:modified = gettabwinvar(i + 1, 1, '&modified')
-        let s .= ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . WebDevIconsGetFileTypeSymbol(l:tabLabel) . ' '
-
+        let s .= ' ' .  WebDevIconsGetFileTypeSymbol(l:tabLabel) . ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . ' '
     endfor
 
     " after the last tab fill with TabLineFill and reset tab page nr

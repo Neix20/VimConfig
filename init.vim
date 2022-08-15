@@ -25,7 +25,6 @@ call plug#begin()
     Plug 'https://github.com/morhetz/gruvbox'
 
     " Syntax Highlighting
-    Plug 'davidhalter/jedi-vim' " Python Syntax 
     Plug 'jelera/vim-javascript-syntax' " Javascript Syntax
 
     " Test Startup Time
@@ -45,6 +44,36 @@ call plug#begin()
 
 call plug#end()
 
+let s:cyan = '#56b6c2'
+let s:blue = '#61afef'
+let s:dark_blue = '#3e4452'
+let s:purple = '#c678dd'
+let s:green = '#98c379'
+let s:red = '#e06c75'
+let s:dark_red = '#be5046'
+let s:orange = '#d19a66'
+let s:dark_orange = '#e5c07b'
+let s:black = '#282c34'
+let s:white = '#abb2bf'
+let s:pure_white = '#ffffff'
+
+" Custom Theme
+function! Set_theme() abort
+    call crystalline#generate_theme({
+        \ 'NormalMode':  [[235, 114], [s:black, s:red]],
+        \ 'InsertMode':  [[235, 39],  [s:black, s:blue]],
+        \ 'VisualMode':  [[235, 170], [s:black, s:purple]],
+        \ 'ReplaceMode': [[235, 204], [s:black, s:dark_red]],
+        \ '':            [[145, 236], [s:white, s:dark_blue]],
+        \ 'Inactive':    [[235, 145], [s:black, s:white]],
+        \ 'Fill':        [[114, 236], [s:black, s:pure_white]],
+        \ 'Tab':         [[145, 236], [s:white, s:dark_blue]],
+        \ 'TabType':     [[235, 170], [s:black, s:purple]],
+        \ 'TabSel':      [[235, 114], [s:black, s:green]],
+        \ 'TabFill':     [[114, 236], [s:green, s:black]],
+        \ })
+endfunction
+
 augroup CrystalLineColorScheme
   autocmd!
   autocmd ColorScheme * call CrystalLineUpdate()
@@ -52,8 +81,13 @@ augroup END
 
 function! CrystalLineUpdate()
     try
-    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
-        let l:color = get({'one': 'onedark', 'PaperColor': 'papercolor', 'gruvbox': 'gruvbox'}, g:colors_name, 'gruvbox')
+    if g:colors_name =~# 'one\|PaperColor\|gruvbox\|NeixOne'
+        let l:color = get({
+            \'one': 'onedark',
+            \'PaperColor': 'papercolor',
+            \'gruvbox': 'gruvbox',
+            \'NeixOne': 'onedark'
+            \}, g:colors_name, 'gruvbox')
         let g:crystalline_theme = l:color
         call crystalline#apply_current_theme()
     endif
@@ -254,10 +288,6 @@ endfunction
 
 set tabline=%!MyTabLine()
 
-let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_theme = 'gruvbox'
-
 " Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -265,6 +295,7 @@ if has("autocmd")
 endif
 
 set termguicolors
+set foldmethod=indent
 
 set tags=./tags,tags
 
@@ -313,8 +344,14 @@ set shortmess+=c
 
 set t_Co=256
 
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme one
+
+let g:crystalline_enable_sep = 1
+let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystalline_theme = 'onedark'
+
+call Set_theme()
 
 " Startify Startup Screen
 let g:startify_custom_header = [

@@ -871,7 +871,7 @@ endif
 "}}}
 
 " Public API --------------------------------------------------------------{{{
-function! one#highlight(group, fg, bg, attr)
+function! NeixOne#highlight(group, fg, bg, attr)
   call <sid>XAPI(a:group, a:fg, a:bg, a:attr)
 endfunction
 "}}}

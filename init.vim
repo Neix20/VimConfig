@@ -54,23 +54,24 @@ let s:dark_red = '#be5046'
 let s:orange = '#d19a66'
 let s:dark_orange = '#e5c07b'
 let s:black = '#282c34'
+let s:pure_black = "#000000"
 let s:white = '#abb2bf'
 let s:pure_white = '#ffffff'
 
 " Custom Theme
 function! Set_theme() abort
     call crystalline#generate_theme({
-        \ 'NormalMode':  [[235, 114], [s:black, s:red]],
-        \ 'InsertMode':  [[235, 39],  [s:black, s:blue]],
-        \ 'VisualMode':  [[235, 170], [s:black, s:purple]],
-        \ 'ReplaceMode': [[235, 204], [s:black, s:dark_red]],
+        \ 'NormalMode':  [[235, 114], [s:pure_black, s:green]],
+        \ 'InsertMode':  [[235, 39],  [s:pure_black, s:dark_orange]],
+        \ 'VisualMode':  [[235, 170], [s:pure_black, s:pure_white]],
+        \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
         \ '':            [[145, 236], [s:white, s:dark_blue]],
-        \ 'Inactive':    [[235, 145], [s:black, s:white]],
-        \ 'Fill':        [[114, 236], [s:black, s:pure_white]],
-        \ 'Tab':         [[145, 236], [s:white, s:dark_blue]],
-        \ 'TabType':     [[235, 170], [s:black, s:purple]],
-        \ 'TabSel':      [[235, 114], [s:black, s:green]],
-        \ 'TabFill':     [[114, 236], [s:green, s:black]],
+        \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
+        \ 'Fill':        [[114, 236], [s:pure_white, s:pure_black]],
+        \ 'Tab':         [[145, 236], [s:pure_white, s:dark_blue]],
+        \ 'TabType':     [[235, 170], [s:pure_black, s:purple]],
+        \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],
+        \ 'TabFill':     [[114, 236], [s:white, s:dark_blue]],
         \ })
 endfunction
 
@@ -345,7 +346,7 @@ set shortmess+=c
 set t_Co=256
 
 set background=light
-colorscheme one
+colorscheme NeixOne
 
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'

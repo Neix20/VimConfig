@@ -292,7 +292,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   let s:dark = 0
   if &background ==# 'dark'
     let s:dark = 1
-    let s:mono_1 = ['#abb2bf', '145']
+    let s:mono_1 = ['#fffff', '145']
     let s:mono_2 = ['#828997', '102']
     let s:mono_3 = ['#5c6370', '59']
     let s:mono_4 = ['#4b5263', '59']
@@ -308,7 +308,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:hue_6   = ['#d19a66', '173'] " orange 1
     let s:hue_6_2 = ['#e5c07b', '180'] " orange 2
 
-    let s:syntax_bg     = ['#282c34', '16']
+    let s:syntax_bg     = ['#000000', '16']
     let s:syntax_gutter = ['#636d83', '60']
     let s:syntax_cursor = ['#2c323c', '16']
 
@@ -319,7 +319,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:visual_grey  = ['#3e4452', '17']
     let s:pmenu        = ['#333841', '16']
   else
-    let s:mono_1 = ['#494b53', '23']
+    let s:mono_1 = ['#000000', '23']
     let s:mono_2 = ['#696c77', '60']
     let s:mono_3 = ['#a0a1a7', '145']
     let s:mono_4 = ['#c2c2c3', '250']

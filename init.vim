@@ -59,13 +59,13 @@ let s:white = '#abb2bf'
 let s:pure_white = '#ffffff'
 
 " Custom Theme
-function! Set_theme() abort
+function! NeixOne_lightTheme() abort
     call crystalline#generate_theme({
         \ 'NormalMode':  [[235, 114], [s:pure_black, s:green]],
         \ 'InsertMode':  [[235, 39],  [s:pure_black, s:dark_orange]],
         \ 'VisualMode':  [[235, 170], [s:pure_black, s:pure_white]],
         \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
-        \ '':            [[145, 236], [s:white, s:dark_blue]],
+        \ '':            [[145, 236], [s:pure_white, s:dark_blue]],
         \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
         \ 'Fill':        [[114, 236], [s:pure_white, s:pure_black]],
         \ 'Tab':         [[145, 236], [s:pure_white, s:dark_blue]],
@@ -73,6 +73,9 @@ function! Set_theme() abort
         \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],
         \ 'TabFill':     [[114, 236], [s:white, s:dark_blue]],
         \ })
+endfunction
+
+function! NeixOne_darkTheme() abort
 endfunction
 
 augroup CrystalLineColorScheme
@@ -87,7 +90,6 @@ function! CrystalLineUpdate()
             \'one': 'onedark',
             \'PaperColor': 'papercolor',
             \'gruvbox': 'gruvbox',
-            \'NeixOne': 'onedark'
             \}, g:colors_name, 'gruvbox')
         let g:crystalline_theme = l:color
         call crystalline#apply_current_theme()
@@ -351,8 +353,6 @@ colorscheme NeixOne
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
 let g:crystalline_theme = 'onedark'
-
-call Set_theme()
 
 " Startify Startup Screen
 let g:startify_custom_header = [

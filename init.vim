@@ -62,20 +62,33 @@ let s:pure_white = '#ffffff'
 function! NeixOne_lightTheme() abort
     call crystalline#generate_theme({
         \ 'NormalMode':  [[235, 114], [s:pure_black, s:green]],
-        \ 'InsertMode':  [[235, 39],  [s:pure_black, s:dark_orange]],
-        \ 'VisualMode':  [[235, 170], [s:pure_black, s:pure_white]],
+        \ 'InsertMode':  [[235, 39],  [s:pure_black, s:blue]],
+        \ 'VisualMode':  [[235, 170], [s:pure_black, s:purple]],
         \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
         \ '':            [[145, 236], [s:pure_white, s:dark_blue]],
         \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
         \ 'Fill':        [[114, 236], [s:pure_white, s:pure_black]],
-        \ 'Tab':         [[145, 236], [s:pure_white, s:dark_blue]],
+        \ 'Tab':         [[145, 236], [s:pure_white, s:black]],
         \ 'TabType':     [[235, 170], [s:pure_black, s:purple]],
         \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],
-        \ 'TabFill':     [[114, 236], [s:white, s:dark_blue]],
+        \ 'TabFill':     [[114, 236], [s:pure_white, s:dark_blue]],
         \ })
 endfunction
 
 function! NeixOne_darkTheme() abort
+    call crystalline#generate_theme({
+        \ 'NormalMode':  [[235, 114], [s:pure_black, s:green]],
+        \ 'InsertMode':  [[235, 39],  [s:pure_black, s:blue]],
+        \ 'VisualMode':  [[235, 170], [s:pure_black, s:purple]],
+        \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
+        \ '':            [[145, 236], [s:pure_white, s:dark_blue]],
+        \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
+        \ 'Fill':        [[114, 236], [s:pure_black, s:pure_white]],
+        \ 'Tab':         [[145, 236], [s:white, s:black]],
+        \ 'TabType':     [[235, 170], [s:pure_black, s:purple]],
+        \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],
+        \ 'TabFill':     [[114, 236], [s:pure_white, s:dark_blue]],
+        \ })
 endfunction
 
 augroup CrystalLineColorScheme
@@ -84,15 +97,21 @@ augroup CrystalLineColorScheme
 augroup END
 
 function! CrystalLineUpdate()
-    try
-    if g:colors_name =~# 'one\|PaperColor\|gruvbox\|NeixOne'
+  try
+    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
         let l:color = get({
             \'one': 'onedark',
             \'PaperColor': 'papercolor',
             \'gruvbox': 'gruvbox',
             \}, g:colors_name, 'gruvbox')
-        let g:crystalline_theme = l:color
-        call crystalline#apply_current_theme()
+        call crystalline#set_theme(l:color)
+    elseif g:colors_name ==# 'NeixOne'
+        if &background ==# 'dark'
+            call NeixOne_darkTheme()
+        else
+            echo "Hello World"
+            call NeixOne_lightTheme()
+        endif
     endif
   catch
   endtry
@@ -116,7 +135,7 @@ function! StatusLine(current, width)
     let l:s = ''
 
     " Body
-    let l:s .= '%#CrystallineFill#'
+    let l:s .= '%#CrystallineTabFill#'
     let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
 
     let l:s .= '%='
@@ -182,12 +201,11 @@ function! StatusLine(current, width)
         endif
     else
         if a:width > 100
-
             " Head
             let l:s = ''
 
             " Second Head
-            let l:s .= '%#CrystallineTab#'
+            let l:s .= '%#CrystallineTabFill#'
             let l:s .= '  %{fugitive#Head()} ' 
 
             " Body
@@ -199,7 +217,7 @@ function! StatusLine(current, width)
             let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
-            let l:s .= '%#CrystallineTab#' . ' %P ' 
+            let l:s .= '%#CrystallineTabFill#' . ' %P ' 
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
@@ -208,7 +226,7 @@ function! StatusLine(current, width)
             let l:s = ''
 
             " Second Head
-            let l:s .= '%#CrystallineTab#'
+            let l:s .= '%#CrystallineTabFill#'
 
             " Body
             let l:s .= '%#CrystallineFill#'
@@ -217,7 +235,7 @@ function! StatusLine(current, width)
             let l:s .= ' %{&ft} %{WebDevIconsGetFileTypeSymbol()} '
 
             " Second Tail
-            let l:s .= '%#CrystallineTab#' . ' %P ' 
+            let l:s .= '%#CrystallineTabFill#' . ' %P ' 
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
@@ -225,16 +243,10 @@ function! StatusLine(current, width)
             " Head
             let l:s = ''
 
-            " Second Head
-            let l:s .= '%#CrystallineTab#'
-
             " Body
-            let l:s .= '%#CrystallineFill#'
+            let l:s .= '%#CrystallineTabFill#'
             let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":"" } '
             let l:s .= '%='
-
-            " Second Tail
-            let l:s .= '%#CrystallineTab#'
 
             " Tail
             let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
@@ -347,7 +359,7 @@ set shortmess+=c
 
 set t_Co=256
 
-set background=light
+set background=dark
 colorscheme NeixOne
 
 let g:crystalline_enable_sep = 1

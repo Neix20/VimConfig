@@ -23,7 +23,7 @@ syntax reset
 if exists('g:colors_name')
   unlet g:colors_name
 endif
-let g:colors_name = 'one'
+let g:colors_name = 'NeixOne'
 
 if !exists('g:one_allow_italics')
   let g:one_allow_italics = 0

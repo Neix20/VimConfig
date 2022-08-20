@@ -56,6 +56,7 @@ let s:dark_orange = '#e5c07b'
 let s:black = '#282c34'
 let s:pure_black = "#000000"
 let s:white = '#abb2bf'
+let s:gray = "#c0c0c0"
 let s:pure_white = '#ffffff'
 
 " Custom Theme
@@ -83,8 +84,8 @@ function! NeixOne_darkTheme() abort
         \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
         \ '':            [[145, 236], [s:pure_white, s:dark_blue]],
         \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
-        \ 'Fill':        [[114, 236], [s:pure_black, s:pure_white]],
-        \ 'Tab':         [[145, 236], [s:white, s:black]],
+        \ 'Fill':        [[114, 236], [s:pure_white, s:black]],
+        \ 'Tab':         [[145, 236], [s:pure_white, s:black]],
         \ 'TabType':     [[235, 170], [s:pure_black, s:purple]],
         \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],
         \ 'TabFill':     [[114, 236], [s:pure_white, s:dark_blue]],
@@ -98,20 +99,15 @@ augroup END
 
 function! CrystalLineUpdate()
   try
-    if g:colors_name =~# 'one\|PaperColor\|gruvbox'
+    if g:colors_name =~# 'one\|PaperColor\|gruvbox\|NeixOne'
         let l:color = get({
             \'one': 'onedark',
             \'PaperColor': 'papercolor',
             \'gruvbox': 'gruvbox',
+            \'NeixOne': 'neixone',
             \}, g:colors_name, 'gruvbox')
+        echo l:color
         call crystalline#set_theme(l:color)
-    elseif g:colors_name ==# 'NeixOne'
-        if &background ==# 'dark'
-            call NeixOne_darkTheme()
-        else
-            echo "Hello World"
-            call NeixOne_lightTheme()
-        endif
     endif
   catch
   endtry

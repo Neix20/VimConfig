@@ -336,8 +336,10 @@ set cc=80                   " set an 80 column border for good coding style
 filetype plugin indent on   " allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 
-" set autoread
-" au CursorHold * checktime  
+function EnableLiveChanges()
+    set autoread
+    au CursorHold * checktime  
+endfunction
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -360,7 +362,7 @@ colorscheme NeixOne
 
 let g:crystalline_enable_sep = 1
 let g:crystalline_statusline_fn = 'StatusLine'
-let g:crystalline_theme = 'onedark'
+let g:crystalline_theme = 'neixone'
 
 " Startify Startup Screen
 let g:startify_custom_header = [

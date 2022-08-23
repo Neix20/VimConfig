@@ -12,6 +12,7 @@ let s:pure_black = "#000000"
 let s:white = '#abb2bf'
 let s:gray = "#c0c0c0"
 let s:pure_white = '#ffffff'
+let s:silver = '#C0C0C0'
 
 function! crystalline#theme#neixone#set_theme() abort
     if &background ==# 'dark'
@@ -22,7 +23,7 @@ function! crystalline#theme#neixone#set_theme() abort
             \ 'ReplaceMode': [[235, 204], [s:pure_black, s:blue]],
             \ '':            [[145, 236], [s:pure_white, s:dark_blue]],
             \ 'Inactive':    [[235, 145], [s:pure_black, s:white]],
-            \ 'Fill':        [[114, 236], [s:pure_white, s:black]],
+            \ 'Fill':        [[114, 236], [s:pure_black, s:silver]],
             \ 'Tab':         [[145, 236], [s:pure_white, s:black]],
             \ 'TabType':     [[235, 170], [s:pure_black, s:purple]],
             \ 'TabSel':      [[235, 114], [s:pure_black, s:green]],

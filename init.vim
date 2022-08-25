@@ -1,3 +1,4 @@
+
 call plug#begin()
 
     " File Explorer
@@ -252,6 +253,71 @@ function! StatusLine(current, width)
     return l:s
 endfunction
 
+function! StatusLineWithoutDev(current, width)
+    let l:s = ''
+
+    " Body
+    let l:s .= '%#CrystallineTabFill#'
+    let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+
+    let l:s .= '%='
+    let l:s .= '%#CrystallineNormalMode#'
+    let l:s .= ' %l:%c '
+
+    if a:width > 100
+        " Head
+        let l:s = ''
+
+        " Second Head
+        let l:s .= '%#CrystallineTabFill#'
+        let l:s .= ' %{fugitive#Head()} ' 
+
+        " Body
+        let l:s .= '%#CrystallineFill#'
+        let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+        let l:s .= '%='
+        let l:s .= ' %{&fileencoding?&fileencoding:&encoding} |'
+        let l:s .= ' %{&ft} '
+
+        " Second Tail
+        let l:s .= '%#CrystallineTabFill#' . ' %P ' 
+
+        " Tail
+        let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+    elseif a:width > 60 && a:width <= 100
+        " Head
+        let l:s = ''
+
+        " Second Head
+        let l:s .= '%#CrystallineTabFill#'
+
+        " Body
+        let l:s .= '%#CrystallineFill#'
+        let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":""} '
+        let l:s .= '%='
+        let l:s .= ' %{&ft} '
+
+        " Second Tail
+        let l:s .= '%#CrystallineTabFill#' . ' %P ' 
+
+        " Tail
+        let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+    elseif a:width > 40 && a:width <= 60
+        " Head
+        let l:s = ''
+
+        " Body
+        let l:s .= '%#CrystallineFill#'
+        let l:s .= ' %t%h%w%m%r %{&paste ?"PASTE ":""}%{&spell?"SPELL ":"" } '
+        let l:s .= '%='
+
+        " Tail
+        let l:s .= '%#CrystallineNormalMode#' . ' %l:%c '
+    endif
+
+    return l:s
+endfunction
+
 " Tab Line
 function MyTabLabel(n)
     let buflist = tabpagebuflist(a:n)
@@ -284,6 +350,36 @@ function MyTabLine()
         let l:tabLabel = MyTabLabel(i + 1)
         let l:modified = gettabwinvar(i + 1, 1, '&modified')
         let s .= ' ' .  WebDevIconsGetFileTypeSymbol(l:tabLabel) . ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . ' '
+    endfor
+
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#CrystallineTabFill#%T'
+
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+        let s .= '%=%#CrystallineTab#%999XX'
+    endif
+
+    return s
+endfunction
+
+function MyTabLineWithoutDev()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+            let s .= '%#CrystallineTabSel#'
+        else
+            let s .= '%#CrystallineTab#'
+        endif
+
+        " set the tab page number (for mouse clicks)
+        " let s .= ' ' . (i + 1)
+
+        " the label is made by MyTabLabel()
+        let l:tabLabel = MyTabLabel(i + 1)
+        let l:modified = gettabwinvar(i + 1, 1, '&modified')
+        let s .= ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . ' '
     endfor
 
     " after the last tab fill with TabLineFill and reset tab page nr
@@ -339,6 +435,18 @@ syntax on                   " syntax highlighting
 function EnableLiveChanges()
     set autoread
     au CursorHold * checktime  
+endfunction
+
+function SetStatuslineNormal()
+    let g:crystalline_statusline_fn = 'StatusLine'
+    call crystalline#set_statusline(g:crystalline_statusline_fn)
+    set tabline=%!MyTabLine()
+endfunction
+
+function SetStatuslineWithoutDev()
+    let g:crystalline_statusline_fn = 'StatusLineWithoutDev'
+    call crystalline#set_statusline(g:crystalline_statusline_fn)
+    set tabline=%!MyTabLineWithoutDev()
 endfunction
 
 " Some servers have issues with backup files, see #649.

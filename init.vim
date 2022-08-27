@@ -393,7 +393,7 @@ function MyTabLineWithoutDev()
     return s
 endfunction
 
-set tabline=%!MyTabLine()
+set tabline=%!MyTabLineWithoutDev()
 
 " Vim jump to the last position when reopening a file
 if has("autocmd")
@@ -469,7 +469,7 @@ set background=dark
 colorscheme NeixOne
 
 let g:crystalline_enable_sep = 1
-let g:crystalline_statusline_fn = 'StatusLine'
+let g:crystalline_statusline_fn = 'StatusLineWithoutDev'
 let g:crystalline_theme = 'neixone'
 
 " Startify Startup Screen

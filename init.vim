@@ -44,6 +44,7 @@ call plug#begin()
     Plug 'https://github.com/preservim/tagbar' 
 
     " Snippets
+    Plug 'https://github.com/SirVer/ultisnips'
     Plug 'https://github.com/honza/vim-snippets'
     
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -518,3 +519,11 @@ vnoremap <C-z> u
 
 " Toggle TagBar
 nmap <F8> :TagbarToggle<CR>
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

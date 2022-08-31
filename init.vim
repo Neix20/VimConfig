@@ -39,6 +39,12 @@ call plug#begin()
 
     " Auto Format
     Plug 'vim-autoformat/vim-autoformat'
+
+    " Tags
+    Plug 'https://github.com/preservim/tagbar' 
+
+    " Snippets
+    Plug 'https://github.com/honza/vim-snippets'
     
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -510,3 +516,5 @@ nnoremap <C-z> u
 inoremap <C-z> u
 vnoremap <C-z> u
 
+" Toggle TagBar
+nmap <F8> :TagbarToggle<CR>

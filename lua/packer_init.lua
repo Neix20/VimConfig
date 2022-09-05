@@ -6,17 +6,9 @@ if not status_ok then
 end
 
 return packer.startup(function(use)
-    -- File Explorer
-    use 'scrooloose/nerdtree'
-
-    -- Vim Info
-    use 'rbong/vim-crystalline'
 
     -- Vim Surround Statement with Brackets
     use 'tpope/vim-surround'
-
-    -- Homepage
-    use 'mhinz/vim-startify'
 
     -- Icons
     use 'ryanoasis/vim-devicons'
@@ -29,9 +21,6 @@ return packer.startup(function(use)
     use 'NLKNguyen/papercolor-theme'
 
     use 'morhetz/gruvbox'
-
-    -- Syntax Highlighting
-    use 'jelera/vim-javascript-syntax' -- Javascript Syntax
 
     -- Test Startup Time
     use 'dstein64/vim-startuptime'
@@ -62,11 +51,8 @@ return packer.startup(function(use)
     -- Lua Plugins
 
     -- Dashboard (start screen)
-    use {
-        'goolord/alpha-nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-    }
-
+    use 'goolord/alpha-nvim'
+    
     -- LSP
     use 'neovim/nvim-lspconfig'
 
@@ -82,10 +68,12 @@ return packer.startup(function(use)
         },
     }
 
+    -- File explorer
+    use 'kyazdani42/nvim-tree.lua'
+
     -- Statusline
     use {
-        'feline-nvim/feline.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
+        'feline-nvim/feline.nvim'
     }
 
     -- Treesitter interface

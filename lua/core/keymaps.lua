@@ -10,13 +10,9 @@ function imap(shortcut, command)
   map('i', shortcut, command)
 end
 
-
 function vmap(shortcut, command)
   map('v', shortcut, command)
 end
-
--- NerdTree Commands
-nmap('<C-n>', ':NERDTree<CR>')
 
 -- Replace Undo
 nmap('<C-z>', 'u')
@@ -25,3 +21,6 @@ vmap('<C-z>', 'u')
 
 -- Toggle TagBar
 nmap('<F8>', ':TagbarToggle<CR>')
+
+-- NvimTree
+nmap('<C-n>', ':NvimTreeToggle<CR>')            -- open/close

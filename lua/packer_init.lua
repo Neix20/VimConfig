@@ -6,12 +6,12 @@ if not status_ok then
 end
 
 return packer.startup(function(use)
-
     -- Vim Surround Statement with Brackets
     use 'tpope/vim-surround'
 
     -- Icons
-    use 'ryanoasis/vim-devicons'
+    -- use 'ryanoasis/vim-devicons'
+    use 'kyazdani42/nvim-web-devicons'
 
     -- Auto Pairs
     use 'jiangmiao/auto-pairs'
@@ -52,7 +52,8 @@ return packer.startup(function(use)
 
     -- Dashboard (start screen)
     use 'goolord/alpha-nvim'
-    
+    -- use 'mhinz/vim-startify'
+
     -- LSP
     use 'neovim/nvim-lspconfig'
 
@@ -70,11 +71,11 @@ return packer.startup(function(use)
 
     -- File explorer
     use 'kyazdani42/nvim-tree.lua'
+    -- use 'scrooloose/nerdtree'
 
     -- Statusline
-    use {
-        'feline-nvim/feline.nvim'
-    }
+    use 'feline-nvim/feline.nvim'
+    -- use 'rbong/vim-crystalline'
 
     -- Treesitter interface
     use {

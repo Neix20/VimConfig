@@ -8,7 +8,6 @@ require('core/statusline')
 require('plugins/alpha-nvim')
 require('plugins/nvim-cmp')
 require('plugins/nvim-lspconfig')
-require('plugins/nvim-tree')
 require('plugins/nvim-treesitter')
 
 local g = vim.g       -- Global variables

@@ -10,7 +10,7 @@ return packer.startup(function(use)
     use 'tpope/vim-surround'
 
     -- Icons
-    -- use 'ryanoasis/vim-devicons'
+    use 'ryanoasis/vim-devicons'
     use 'kyazdani42/nvim-web-devicons'
 
     -- Auto Pairs
@@ -70,8 +70,8 @@ return packer.startup(function(use)
     }
 
     -- File explorer
-    use 'kyazdani42/nvim-tree.lua'
-    -- use 'scrooloose/nerdtree'
+    -- use 'kyazdani42/nvim-tree.lua'
+    use 'scrooloose/nerdtree'
 
     -- Statusline
     use 'feline-nvim/feline.nvim'
@@ -82,6 +82,9 @@ return packer.startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     }
+
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

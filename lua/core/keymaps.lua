@@ -23,4 +23,4 @@ vmap('<C-z>', 'u')
 nmap('<F8>', ':TagbarToggle<CR>')
 
 -- NvimTree
-nmap('<C-n>', ':NvimTreeToggle<CR>')            -- open/close
+nmap('<C-n>', ':NERDTreeToggle<CR>')            -- open/close

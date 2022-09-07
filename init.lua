@@ -9,8 +9,10 @@ require('plugins/alpha-nvim')
 require('plugins/nvim-cmp')
 require('plugins/nvim-lspconfig')
 require('plugins/nvim-treesitter')
-require('plugins/lualine')
 require('plugins/nvim-tree')
+
+require('plugins/lualine')
+require('plugins/tabline')
 
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)

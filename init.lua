@@ -3,12 +3,14 @@ require('packer_init')
 require('core/options')
 require('core/keymaps')
 require('core/autocmds')
-require('core/statusline')
+-- require('core/statusline')
 
 require('plugins/alpha-nvim')
 require('plugins/nvim-cmp')
 require('plugins/nvim-lspconfig')
 require('plugins/nvim-treesitter')
+require('plugins/lualine')
+require('plugins/nvim-tree')
 
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)

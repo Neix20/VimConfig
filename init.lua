@@ -3,6 +3,7 @@ require('packer_init')
 require('core/options')
 require('core/keymaps')
 require('core/autocmds')
+require('core/tabline')
 -- require('core/statusline')
 
 require('plugins/alpha-nvim')
@@ -12,7 +13,6 @@ require('plugins/nvim-treesitter')
 require('plugins/nvim-tree')
 
 require('plugins/lualine')
-require('plugins/tabline')
 
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
@@ -25,11 +25,3 @@ vim.cmd([[
     colorscheme NeixOne
 ]])
 
--- UltiSnips Settings
-vim.cmd([[
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<c-b>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-    let g:UltiSnipsEditSplit="vertical"
-]])

@@ -38,8 +38,8 @@ return packer.startup(function(use)
     use 'preservim/tagbar'
 
     -- Snippets
-    use 'SirVer/ultisnips'
-    use 'honza/vim-snippets'
+    --use 'SirVer/ultisnips'
+    --use 'honza/vim-snippets'
 
     -- Tabulate
     use 'godlygeek/tabular'
@@ -77,9 +77,6 @@ return packer.startup(function(use)
     -- use 'feline-nvim/feline.nvim'
     -- use 'rbong/vim-crystalline'
     use 'nvim-lualine/lualine.nvim'
-
-    -- TabLine
-    use 'kdheepak/tabline.nvim'
 
     -- Treesitter interface
     use {

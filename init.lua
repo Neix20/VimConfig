@@ -25,3 +25,16 @@ vim.cmd([[
     colorscheme NeixOne
 ]])
 
+
+-- Colors
+vim.cmd([[
+    hi ActiveTab guibg=#98c379 guifg=#000000 ctermbg=114 ctermfg=235
+    hi InactiveTab guibg=#000000 guifg=#ffffff ctermbg=236 ctermfg=145
+    hi TabBuffer guibg=#282c34 guifg=#282c34 ctermbg=236 ctermfg=114
+]])
+
+-- Set Tab Line
+vim.cmd([[
+    set tabline=%!MyTabLine()
+]])
+

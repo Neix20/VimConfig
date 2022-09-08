@@ -25,7 +25,6 @@ vim.cmd([[
     colorscheme NeixOne
 ]])
 
-
 -- Colors
 vim.cmd([[
     hi ActiveTab guibg=#98c379 guifg=#000000 ctermbg=114 ctermfg=235

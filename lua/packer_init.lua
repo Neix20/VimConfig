@@ -84,6 +84,12 @@ return packer.startup(function(use)
         run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     }
 
+    -- Git AutoComplete
+    use {
+        "petertriho/cmp-git",
+        requires = "nvim-lua/plenary.nvim"
+    }
+
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 

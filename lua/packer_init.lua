@@ -10,7 +10,7 @@ return packer.startup(function(use)
     use 'tpope/vim-surround'
 
     -- Icons
-    -- use 'ryanoasis/vim-devicons'
+    use 'ryanoasis/vim-devicons'
     use 'kyazdani42/nvim-web-devicons'
 
     -- Auto Pairs

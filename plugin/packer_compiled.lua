@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\txen2\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-git"] = {
+    loaded = true,
+    path = "C:\\Users\\txen2\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-git",
+    url = "https://github.com/petertriho/cmp-git"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "C:\\Users\\txen2\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp-nvim-lsp",
@@ -163,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\txen2\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\papercolor-theme",
     url = "https://github.com/NLKNguyen/papercolor-theme"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "C:\\Users\\txen2\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
   },
   tabular = {
     loaded = true,

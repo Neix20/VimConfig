@@ -1,6 +1,8 @@
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
 
+local M = {}
+
 -- Tab Label
 vim.cmd([[
     function MyTabLabel(n)
@@ -36,7 +38,7 @@ vim.cmd([[
             " the label is made by MyTabLabel()
             let l:tabLabel = MyTabLabel(i + 1)
             let l:modified = gettabwinvar(i + 1, 1, '&modified')
-            let s .= ' ' . ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . ' '
+            let s .= ' ' . WebDevIconsGetFileTypeSymbol(l:tabLabel) . ' ' . l:tabLabel . ' ' . ( l:modified == 1 ? '[+] ' : '') . ' '
         endfor
 
         " after the last tab fill with TabLineFill and reset tab page nr
@@ -50,3 +52,5 @@ vim.cmd([[
         return s
     endfunction
 ]])
+
+

@@ -141,3 +141,8 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- Autoformat On Save
+vim.cmd([[
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+]])

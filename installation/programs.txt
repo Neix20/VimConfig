@@ -12,6 +12,7 @@ python
 nodejs
 
 openjdk
+dotnet
 lua
 
 neovim

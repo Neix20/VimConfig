@@ -14,8 +14,9 @@ scoop install clang
 scoop install python
 scoop install nodejs
 
-scoop install openjdl
+scoop install openjdk
 scoop install lua
+scoop install dotnet-sdk
 
 scoop install neovim
 scoop install fzf

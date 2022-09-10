@@ -18,8 +18,11 @@
 # scoop install silversearcher-ag
 # scoop install universal-ctags
 
+# Clone Packer.nvim
+# git clone --depth 1 https://github.com/wbthomason/packer.nvim C:/Users/txen2/AppData/Local/nvim-data/site/pack/packer/start/packer.nvim
+
 # Linux:
-echo "Now Installing Packages"
+echo "Now Installing Packages In Linux"
 
 pkg install openssh
 pkg install cmake
@@ -36,12 +39,6 @@ pkg install neovim
 pkg install fzf
 pkg install silversearcher-ag
 pkg install universal-ctags
-
-# Clone Vim Config
-mkdir -p ~/.config/nvim
-cd ~/.config/nvim
-git clone https://github.com/Neix20/VimConfig .
-cd ~
 
 # Clone Packer.nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim

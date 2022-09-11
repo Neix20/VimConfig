@@ -17,6 +17,14 @@ require('plugins/lualine')
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
 
+-- Custom Function: Enable Live Changes
+vim.cmd([[
+    function EnableLiveChanges()
+        set autoread
+        au CursorHold * checktime
+    endfunction
+]])
+
 -- Set Background To Dark
 opt.background = 'dark'
 

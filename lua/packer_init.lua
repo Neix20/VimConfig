@@ -51,11 +51,7 @@ return packer.startup(function(use)
     -- Lua Plugins
 
     -- Dashboard (start screen)
-    use {
-        'goolord/alpha-nvim', branch = 'feature/startify-fortune',
-        requires = {'BlakeJC94/alpha-nvim-fortune'},
-        config = function() require("config.alpha") end
-    }
+    use 'goolord/alpha-nvim'
     -- use 'mhinz/vim-startify'
 
     -- LSP

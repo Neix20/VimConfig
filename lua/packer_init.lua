@@ -28,9 +28,6 @@ return packer.startup(function(use)
     -- Git
     use 'tpope/vim-fugitive'
 
-    -- Note Editor
-    use 'vimwiki/vimwiki'
-
     -- Auto Format
     use 'vim-autoformat/vim-autoformat'
 

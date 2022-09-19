@@ -72,9 +72,9 @@ return packer.startup(function(use)
     -- use 'scrooloose/nerdtree'
 
     -- Statusline
-    -- use 'feline-nvim/feline.nvim'
+    use 'feline-nvim/feline.nvim'
     -- use 'rbong/vim-crystalline'
-    use 'nvim-lualine/lualine.nvim'
+    -- use 'nvim-lualine/lualine.nvim'
 
     -- Treesitter interface
     use {

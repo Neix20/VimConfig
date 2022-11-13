@@ -1,3 +1,4 @@
+# My Own Custom
 cd ~
 clear
 
@@ -19,19 +20,17 @@ alias home='cd ~'
 alias cls="clear"
 
 # Custom Location
-alias nvimHome='cd $APPDATA/../Local/nvim'
-
-# Export Path
-export PATH=$PATH:"/C/Program Files/Neovim/bin"
-export PATH=$PATH:"/C/Users/txen2/AppData/Local/Programs/Microsoft VS Code/bin"
-
-# Export Language
-export PATH=$PATH:"/C/Users/txen2/AppData/Local/Programs/Python/Python39"
-export PATH=$PATH:"/C/Users/txen2/AppData/Local/Programs/Python/Python39/Scripts"
-export PATH=$PATH:"/C/Program Files (x86)/NodeJS"
+alias nvimHome='cd ~/.config/nvim'
+alias wslHome='cd /mnt/c/Users/txen2'
+alias c='cd /mnt/c'
+alias d='cd /mnt/d'
 
 export USERNAME="Neix19365"
 export NICKNAME="Neix"
 
+# Enable Snap Store (For WSL)
+exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
+
 # Welcome message
 echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
+

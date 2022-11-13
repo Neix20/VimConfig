@@ -20,6 +20,7 @@ pkg install ctags
 
 
 pkg install lsd
+pkg install exa
 pkg install glow
 pkg install fd
 

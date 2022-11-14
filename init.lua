@@ -7,8 +7,8 @@ require('core/tabline')
 
 require('plugins/alpha-nvim')
 require('plugins/nvim-cmp')
-require('plugins/nvim-lspconfig')
-require('plugins/nvim-treesitter')
+-- require('plugins/nvim-lspconfig')
+-- require('plugins/nvim-treesitter')
 require('plugins/nvim-tree')
 require('plugins/feline')
 

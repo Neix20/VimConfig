@@ -78,7 +78,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
-    
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -148,7 +148,7 @@ export USERNAME="Neix19365"
 export NICKNAME="Neix"
 
 # Enable Snap Store (For WSL)
-exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
+# exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
 
 # Welcome message
 echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
